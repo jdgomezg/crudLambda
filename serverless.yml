@@ -1,0 +1,27 @@
+service: lambdaCrud
+
+provider:
+  name: aws
+  runtime: nodejs8.10	
+  profile: developer	
+  stage: dev			
+  region: us-east-1	      
+  role: arn:aws:iam::716351517492:role/DynamoDBFullAccess
+
+functions:
+  crud:
+    handler: handler.records
+    events:
+      - http:
+          path: records/read
+          method: get
+      - http:
+          path: records/create
+          method: post
+      - http:
+          path: records/update
+          method: put
+      - http:
+          path: records/delete
+          method: delete
+    memorySize: 128
